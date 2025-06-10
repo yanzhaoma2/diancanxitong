@@ -1,35 +1,48 @@
+/**
+ * 声明该类所属的包，此包为项目的视图层包，用于存放与界面展示和用户交互相关的类。
+ */
 package com.study.shop.view;
 
+// 导入列表集合类，用于存储和操作多个对象
 import java.util.List;
+// 导入控制台输入类，用于获取用户在控制台输入的信息
 import java.util.Scanner;
 
 import com.study.shop.dao.OrderDao;
+// 导入餐品实体类，用于封装餐品相关的属性和方法
 import com.study.shop.po.Food;
 
 public class CountManager {
-    public static Scanner sc = new Scanner(System.in);
+    // 创建控制台输入扫描器的静态实例，用于获取用户在控制台输入的信息
+public static Scanner sc = new Scanner(System.in);
     public static OrderDao orderDao = new OrderDao();
 
     public static void countMenu() {
-        System.out.println("-------------统计管理----------");
+        // 打印统计管理菜单的标题
+System.out.println("-------------统计管理----------");
         System.out.println("\t1.统计销量前3的餐品");
         System.out.println("\t2.统计销售额前3的餐品");
         System.out.println("\t3.返回上一菜单");
         System.out.println("\t0.退出系统");
         System.out.println("------------------------------");
         System.out.println("请选择业务：");
-        String option = sc.next();
+        // 从控制台获取用户输入的选项
+String option = sc.next();
         switch (option) {
-            case "1":
+            // 当用户选择1时，调用统计销量前3餐品的方法
+case "1":
                 countSalesTop3();
                 break;
-            case "2":
+            // 当用户选择2时，调用统计销售额前3餐品的方法
+case "2":
                 countRevenueTop3();
                 break;
-            case "3":
+            // 当用户选择3时，返回店主主菜单
+case "3":
                 ShopownerView.mainMenu();
                 break;
-            case "0":
+            // 当用户选择0时，退出系统
+case "0":
                 System.exit(0);
                 break;
             default:
