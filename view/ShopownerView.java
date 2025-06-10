@@ -39,16 +39,19 @@ public class ShopownerView {
     static void mainMenu() {
         while (true) {
             System.out.println("-------------------------------------");
-            // 打印类目管理菜单选项
-System.out.println("\t1. 类目管理");
-            // 打印餐品管理菜单选项
-System.out.println("\t2. 餐品管理");
-            // 打印订单管理菜单选项
-System.out.println("\t3. 订单管理");
-            // 打印统计管理菜单选项
-System.out.println("\t4. 统计管理");
-            // 打印退出系统菜单选项
-System.out.println("\t0. 退出系统");
+                 // 打印类目管理菜单选项
+                System.out.println("\t1. 类目管理");
+                            // 打印餐品管理菜单选项
+                System.out.println("\t2. 餐品管理");
+                            // 打印订单管理菜单选项
+                System.out.println("\t3. 订单管理");
+                            // 打印统计管理菜单选项
+                System.out.println("\t4. 统计管理");
+                            // 打印退出系统菜单选项
+                System.out.println("\t0. 退出系统");
+
+                System.out.println("\t5. 营业状态管理");
+
             System.out.println("-------------------------------------");
             System.out.println("请选择业务：");
             String option = sc.next();
@@ -64,6 +67,9 @@ System.out.println("\t0. 退出系统");
                     break;
                 case "4":
                     CountManager.countMenu();
+                    break;
+                case "5":
+                    shopownerDao.toggleShopStatus();
                     break;
                 case "0":
                     System.exit(0);

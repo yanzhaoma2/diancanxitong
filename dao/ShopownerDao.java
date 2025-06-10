@@ -7,12 +7,60 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 // 导入 java.sql 包中的 ResultSet 类，用于存储数据库查询结果
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Scanner;
 
 // 导入自定义的 JdbcUtil 工具类，用于管理数据库连接和资源关闭
 import com.study.shop.util.JdbcUtil;
 
 // 定义一个公共的 ShopownerDao 类，用于处理店主相关的数据库操作
 public class ShopownerDao {
+    /**
+     * 获取当前营业状态
+     */
+    public String getShopStatus() {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            conn = JdbcUtil.getConn();
+            String sql = "SELECT status FROM shopowner LIMIT 1";
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            if(rs.next()) {
+                return rs.getString("status");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JdbcUtil.closeAll(conn, ps, rs);
+        }
+        return "1"; // 默认返回营业中
+    }
+
+    /**
+     * 切换营业状态
+     */
+    public void toggleShopStatus() {
+        System.out.println("请输入您要修改的营业状态：");
+        Scanner scanner = new Scanner(System.in);
+        String newStatus = scanner.next();
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            conn = JdbcUtil.getConn();
+            String sql = "UPDATE shopowner SET status = ?";
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, newStatus);
+            ps.executeUpdate();
+            System.out.println("修改成功");
+        } catch (SQLException e) {
+            System.out.println("\u001b[31m状态更新失败：" + e.getMessage() + "\u001b[0m");
+        } finally {
+            JdbcUtil.closeAll(conn, ps, rs);
+        }
+    }
     /**
      * 店主登录
      * @param phone 电话

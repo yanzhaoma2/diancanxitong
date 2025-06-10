@@ -8,9 +8,10 @@ package com.study.shop.po;
  */
 public class Shopowner {
     /**
-     * 营业状态：0-休息中 1-营业中
+     * 营业状态（0-休息中 1-营业中）
      */
-    private String status;
+    private String status = "1";
+
         /**
      * 店铺的唯一标识符。
      */

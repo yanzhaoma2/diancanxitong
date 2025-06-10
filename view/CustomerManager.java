@@ -26,6 +26,7 @@ import com.study.shop.dao.FoodDao;
 // 导入订单数据访问对象类，封装了与数据库中订单表的增删改查操作
 import com.study.shop.dao.OrderDao;
 // 导入评价实体类，用于封装评价相关的属性和方法，与数据库表字段对应
+import com.study.shop.dao.ShopownerDao;
 import com.study.shop.po.Appraise;
 // 导入餐品实体类，用于封装餐品的各种属性，如名称、价格、类目等
 import com.study.shop.po.Food;
@@ -39,6 +40,8 @@ public static Scanner sc = new Scanner(System.in);
 public static FoodDao foodDao = new FoodDao();
     // 创建一个静态的订单数据访问对象，用于与数据库中的订单表进行交互，方便类内方法调用
 public static OrderDao orderDao = new OrderDao();
+
+public static ShopownerDao shopownerDao = new ShopownerDao();
 
     public static void main(String[] args) {
         customerMenu();
@@ -57,6 +60,12 @@ String option = sc.next();
             switch (option) {
                 // 当用户输入的选项为1时，调用点餐方法，进入点餐流程
 case "1":
+            // 判断商家是否休息中
+                if("0".equals(shopownerDao.getShopStatus())) {
+    System.out.println("=== [商家休息中，暂不可下单] ===");
+    return;
+}
+System.out.println("=== 正在营业中 ===");
                 orderFood();
                 break;
                 // 当用户输入的选项为0时，调用系统退出方法，终止程序运行
@@ -119,8 +128,6 @@ private static List<Order> addCart(List<Food> list) {
         while (true) {
             System.out.println("餐品编号：");
             int foodId = sc.nextInt();
-            System.out.println("桌号：");
-            int deskNumber = sc.nextInt();
             System.out.println("手机号：");
             String phone = sc.next();
             System.out.println("数量：");
