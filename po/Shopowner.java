@@ -7,6 +7,10 @@ package com.study.shop.po;
  * 店主实体类，用于表示系统中的店主信息。
  */
 public class Shopowner {
+    /**
+     * 营业状态：0-休息中 1-营业中
+     */
+    private String status;
         /**
      * 店铺的唯一标识符。
      */
@@ -105,6 +109,8 @@ public class Shopowner {
      * 
      * @return 店主登录系统的密码。
      */
+ 
+
     public String getPassword() {
         return password;
     }
@@ -132,6 +138,20 @@ public class Shopowner {
                 ", phone='" + phone + '\'' +
                 ", password='" + password + '\'' +
                 '}';
+    }
+
+    /**
+     * 获取营业状态：0-休息中 1-营业中
+     *
+     * @return 营业状态
+     */
+    
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
 }
